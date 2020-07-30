@@ -1,2 +1,2 @@
 # MIPS
-One-cycle MIPS processor
+Directory, that contains completed one-cycle MIPS processor
