@@ -5,16 +5,16 @@ module barrel_shifter(
 	o_data
 );
 
-localparam	SLL	= 3'b001;		// Shift Left Logical
-localparam	SRL	= 3'b010;		// Shift Right Logical
-localparam	SRA	= 3'b100;		// Shift Right Arithmetic
-localparam	ROR	= 3'b110;		// Rotate Right (Right circular shift)
-localparam	ROL	= 3'b111;		// Rotate Left (Left circular shift)
+localparam	SLL	= 3'b001;	// Shift Left Logical
+localparam	SRL	= 3'b010;	// Shift Right Logical
+localparam	SRA	= 3'b100;	// Shift Right Arithmetic
+localparam	ROR	= 3'b110;	// Rotate Right (Right circular shift)
+localparam	ROL	= 3'b111;	// Rotate Left (Left circular shift)
 						
-input	[31:0]  i_data;			// Input Data
-input	[2:0]   shift_op;		// Shift operation mode
+input	[31:0]  i_data;		// Input Data
+input	[2:0]   shift_op;	// Shift operation mode
 input	[4:0]   shift_amount;	// Shift amount constant
-output	[31:0]	o_data;			// Shifted Input Data
+output	[31:0]	o_data;		// Shifted Input Data
 	
 wire	[63:0]	rshift = {i_data, i_data} >> shift_amount;
 wire	[63:0]	lshift = {i_data, i_data} << shift_amount;

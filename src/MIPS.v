@@ -5,30 +5,30 @@ module MIPS(
 
 /******************************************************************************/
 // Clock and reset signals
-input			clk;
-input			rst;
+input		clk;
+input		rst;
 
 // 'alu.v' signals
-reg		[31:0]	alu_srcA;
-reg		[31:0]	alu_srcB;
+reg	[31:0]	alu_srcA;
+reg	[31:0]	alu_srcB;
 wire	[3:0]	alu_ctrl;
 wire	[31:0]	alu_result;
-wire			Zero;
+wire		Zero;
 
 // 'alu_control.v' signals
 wire 	[5:0]	OpCode;
 wire 	[5:0]	func;
-wire			alu_shift_ctrl;
+wire		alu_shift_ctrl;
 
 // 'control_unit.v' signals
-wire			RegDst;
-wire			RegWrite;
-wire			ALUSrc;
-wire			MemWrite;
-wire			Beq;
-wire			Bne;
-wire			Jump;
-wire			MemtoReg;
+wire		RegDst;
+wire		RegWrite;
+wire		ALUSrc;
+wire		MemWrite;
+wire		Beq;
+wire		Bne;
+wire		Jump;
+wire		MemtoReg;
 
 // 'data_memory.v' signals
 wire	[31:0]	dm_wdata;
@@ -40,7 +40,7 @@ wire	[31:0]	instr_addr;
 wire	[31:0]	Instruction;	// Instruction Memory Output Instruction - Imm32
 
 // 'program_counter.v' signals
-reg		[31:0]	pc_next_addr;
+reg	[31:0]	pc_next_addr;
 wire	[31:0]	pc_curr_addr;
 
 // 'register_file.v' signals
@@ -62,7 +62,7 @@ wire	[31:0]	se_ext_instr;	// SignExtender output
 wire	[31:0]	pc_plus_4;
 wire	[31:0]	pc_jump_0;
 wire	[31:0]	pc_jump_1;
-wire			PCSrc;
+wire		PCSrc;
 
 assign pc_plus_4 = pc_curr_addr + 32'd4;
 assign pc_jump_0 = pc_plus_4 + {se_ext_instr[29:0], 2'b0};
@@ -73,21 +73,21 @@ assign PCSrc = (Beq & Zero) | (Bne & ~Zero);
 always @* begin
 	casez(Jump)
 		1'b0:	begin
-					casez(PCSrc)
-						1'b0:	pc_next_addr = pc_plus_4;
-						1'b1:	pc_next_addr = pc_jump_0;
-					endcase
-				end
+				casez(PCSrc)
+					1'b0:	pc_next_addr = pc_plus_4;
+					1'b1:	pc_next_addr = pc_jump_0;
+				endcase
+		end
 		1'b1:	begin
-					pc_next_addr = pc_jump_1;
-				end
+				pc_next_addr = pc_jump_1;
+		end
 	endcase
 end
 				
 program_counter program_counter_inst(
 	.pc_next_addr		(pc_next_addr),
-	.clk				(clk),
-	.rst				(rst),
+	.clk			(clk),
+	.rst			(rst),
 	.pc_curr_addr		(pc_curr_addr)
 );
 
@@ -107,22 +107,20 @@ assign func = Instruction[5:0];
 
 always @(*) begin
 	casex(alu_shift_ctrl)
-		1'b0:
-			begin
+		1'b0: begin
 				alu_srcA = regfile_rdata1;
-			end
-		1'b1:	
-			begin
+		end
+		1'b1: begin
 				alu_srcA = {27'b0, Instruction[10:6]};
-			end
+		end
 	endcase
 end
 
 alu_control	alu_control_inst(
-	.func			(func),
-	.OpCode			(OpCode),
+	.func		(func),
+	.OpCode		(OpCode),
 	.alu_shift_ctrl	(alu_shift_ctrl),
-	.alu_ctrl		(alu_ctrl)
+	.alu_ctrl	(alu_ctrl)
 );
 
 // Register File
@@ -152,9 +150,9 @@ register_file register_file_inst(
 	.regfile_addr2	(regfile_addr2),
 	.regfile_addr3	(regfile_addr3),
 	.regfile_wdata	(regfile_wdata),
-	.RegWrite		(RegWrite),
-	.clk			(clk),
-	.rst			(rst),
+	.RegWrite	(RegWrite),
+	.clk		(clk),
+	.rst		(rst),
 	.regfile_rdata1	(regfile_rdata1),
 	.regfile_rdata2	(regfile_rdata2)
 );
@@ -178,11 +176,11 @@ end
 // ALU
 
 alu alu_inst(
-	.alu_srcA		(alu_srcA),
-	.alu_srcB		(alu_srcB),
+	.alu_srcA	(alu_srcA),
+	.alu_srcB	(alu_srcB),
 	.alu_control	(alu_ctrl),
-	.alu_result		(alu_result),
-	.Zero			(Zero)
+	.alu_result	(alu_result),
+	.Zero		(Zero)
 );			    
 
 // Control Unit

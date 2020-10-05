@@ -4,7 +4,7 @@ module testbench;
 
 localparam PERIOD = 20;	
 
-reg rst;
+reg	rst;
 reg	clk;
 													
 MIPS MIPS_i(
@@ -15,13 +15,13 @@ MIPS MIPS_i(
 initial begin
 	#10	clk = 0;
 	
-    forever #(PERIOD/2) clk = ~clk;
+	forever #(PERIOD/2) clk = ~clk;
 end
 
 initial begin
-	#0		rst = 1;
+	#0	rst = 1;
 	
-	#10		rst = 0;
+	#10	rst = 0;
 	
 	#620	$finish;  
 end

@@ -14,9 +14,9 @@ input	[4:0]	regfile_addr1;
 input	[4:0]	regfile_addr2;
 input  	[4:0]	regfile_addr3;
 input	[31:0]	regfile_wdata;
-input			RegWrite;
-input			clk; 
-input			rst;
+input		RegWrite;
+input		clk; 
+input		rst;
 output	[31:0]	regfile_rdata1;
 output 	[31:0]	regfile_rdata2;
 

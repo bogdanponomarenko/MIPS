@@ -20,16 +20,16 @@ localparam	OR	= 4'b0111; 	// OR  - Bitwise 'OR'
 localparam	NOR	= 4'b1011;	// NOR - Bitwise negation of 'OR'	
 localparam	XOR	= 4'b1111;	// XOR - Bitwise exclusive 'OR'	
 
-input		[31:0]	alu_srcA;		// A operand
-input		[31:0]	alu_srcB;		// B operand
+input		[31:0]	alu_srcA;	// A operand
+input		[31:0]	alu_srcB;	// B operand
 input		[3:0]	alu_control;	// Control signal (derived from the OpCode)
-output reg	[31:0]	alu_result;		// Output result of ALU
-output				Zero;			// Zero flag for examining ALU
+output reg	[31:0]	alu_result;	// Output result of ALU
+output			Zero;		// Zero flag for examining ALU
 
 wire		[31:0]	shifted_data;	// Shifted Data (from barrel_shifter)
 wire		[4:0]	shift_amount;	// Shift amount constant
 
-reg			[2:0]	shift_op;		// Shift operation mode
+reg		[2:0]	shift_op;	// Shift operation mode
 
 integer	i;
 

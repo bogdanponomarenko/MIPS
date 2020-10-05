@@ -17,7 +17,7 @@ parameter	[DATA_WIDTH-1:0]	ROM_DEFLT_DATA	= {DATA_WIDTH{1'b0}};
 input		[ADDR_WIDTH-1:0]	rom_addr;
 output reg	[DATA_WIDTH-1:0]	rom_rdata;
 
-reg			[DATA_WIDTH-1:0]	rom_mem [ROM_BLOCKS_NUM-1:0];
+reg		[DATA_WIDTH-1:0]	rom_mem [ROM_BLOCKS_NUM-1:0];
 
 initial begin: INIT
 	integer i;

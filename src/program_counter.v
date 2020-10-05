@@ -6,8 +6,8 @@ module program_counter(
 );
 
 input		[31:0]	pc_next_addr;
-input				clk;
-input				rst;
+input			clk;
+input			rst;
 output reg	[31:0]	pc_curr_addr;
 
 always @(posedge clk, posedge rst) begin
